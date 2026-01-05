@@ -54,7 +54,7 @@ class ArrayListDemo
 		System.out.println(al1);//[A,10,A,null]
 		
 		/* 2. i) boolean remove(Object element) (implemented From Collection in ArrayList)
-              but works only when we use on Collection object(i.e r.v.)
+              but works only when we use on Collection object(i.e r.v.) 
               ii) Object remove(int index)	(implemented From List in ArrayList)
               but works only when we use on List object(i.e r.v.)
               Note: Works on ArrayList Object both methods as per paramter (reason overloaded)			  
@@ -68,5 +68,100 @@ class ArrayListDemo
 		c1.add(124);
 		System.out.println(c1.remove(2));
 		System.out.println(c1);
+		
+		/* 3. void add(int index,Object element) (implemented from List in ArrayList 
+		                                         becoz of index)
+			Takes O(n) Complexity (Because Shifting Takes Place)
+		*/
+		// al2.add(1,20);
+		/*Here Exception occur on the above why because ArrayList size is 0 and we are trying
+		to add element on 1 index that's why ArrayIndexOutOfBoundsException occur*/
+		al2.add(0,20); //This will run Properly 
+		al2.add(12);
+		al2.add(15);
+		al2.add(18);
+		al2.add(3,899);
+		System.out.println(al2);
+		
+		
+		/* 4. i) boolean addAll(Collection c) (implemented From Collection in ArrayList)
+		Adds all elements at the end
+		      ii) boolean addAll(int index,Collection c) (implemented From List in ArrayList)
+	    Inserts all elements starting at given index
+		*/
+		
+		System.out.println(al2);
+		al2.addAll(al1);
+		System.out.println(al1);
+		System.out.println(al2);
+		
+		al2.addAll(4,al1);//If index goes out of bound it will give ArrayIndexOutOfBoundsException 
+		System.out.println(al1);
+		System.out.println(al2);
+		
+		/* 5. boolean removeAll(Collection c) (implemented From Collection in ArrayList)
+		remove all elements from arraylist 
+		Interesting: java 8 
+		boolean removeIf(Predicate<? super E> filter);
+		Usage list.removeIf(n -> n % 2 == 0); // removes even numbers
+		*/
+		System.out.println(al1);
+		System.out.println(al2);
+		al2.removeAll(al1);
+		System.out.println(al2);
+		
+		/* 6. boolean retainAll(Collection c) (implemented from collection in ArrayList)
+		Keeps only the elements that are present in the given collection removes everything else
+		*/
+
+		al2.addAll(al1);
+		System.out.println(al1);
+		System.out.println(al2);
+		al2.retainAll(al1);
+		System.out.println(al2);
+		
+		/* 7. Object get(int index) (implemented from List in ArrayList)
+		*/
+		
+		// System.out.println(al1.get(8));ArrayIndexOutOfBoundsException
+		System.out.println(al1.get(0));
+		System.out.println(al1.get(1));
+		System.out.println(al1.get(2));
+		
+		/* 8. Object set(int index,Object new) (implemented from List in ArrayList)
+		Replaces, no shifting, size same, return the replaced object
+		*/
+		
+		System.out.println(al1.set(0,"Element1"));
+		System.out.println(al1.set(1,"Element2"));
+		System.out.println(al1.set(2,"Element3"));
+		// System.out.println(al1.set(3,"Element4")); ArrayIndexOutOfBoundsException
+		System.out.println(al1);
+		
+		/* 9. int indexOf(Object element) (implemented from List in ArrayList)
+		return index of first occurance of element
+		      int lastIndexOf(Object 0) (implemented from List in ArrayList)
+		*/
+		al1.add("Element4");
+		al1.add("Element4");
+		al1.add("Element4");
+		System.out.println(al1);
+		System.out.println(al1.indexOf("Element4"));
+		System.out.println(al1.lastIndexOf("Element4"));
+		
+		/* 10. ListIterator listIterator(); (implemented from list interface in ArrayList)
+		It is List-specific (because of index & bidirectional traversal
+		ArrayList & LinkedList provide their own optimized versions
+		*/
+		ListIterator it = al1.listIterator();
+		while (it.hasNext())
+		{
+			Object val= it.next();
+			if(val == "Element4") {
+				it.set("SetElementUsingIterator");     // replace
+				it.add(22);     // insert
+			}
+		}
+		System.out.println(al1);
 	}
 }
