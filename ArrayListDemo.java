@@ -163,5 +163,28 @@ class ArrayListDemo
 			}
 		}
 		System.out.println(al1);
+		
+		/* 11. void clear() (implemented from Collection in ArrayList)
+		removes all elements from a collection
+		*/
+		System.out.println(al2);
+		al2.clear();
+		System.out.println(al2);
+		
+		/* 12. boolean contains(Object element) (implemented from Collection in ArrayList)
+		       boolean containsAll(Collection c) (implemented from Collection in ArrayList)
+			   T.C = O(n) uses equals method 
+		*/
+		al2.add(232);
+		al2.add(23);
+		al2.add(4222);
+		System.out.println(al1.contains("Element2"));
+		System.out.println(al1.containsAll(al2));
+		
+		/* 13. boolean isEmpty() (implemented from Collection in ArrayList)
+		       int size() (implemented from Collection in ArrayList)
+		*/
+		System.out.println(al3.isEmpty());
+		System.out.println(al2.size());		
 	}
 }
