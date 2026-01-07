@@ -188,3 +188,8 @@ class ArrayListDemo
 		System.out.println(al2.size());		
 	}
 }
+/* Where ArrayList Preffered?
+Ans:- when there is retrieval operation,
+    but when it somes to insertion and deletion somewhere at mid 
+	it is not preferred because too much shifting would take place.	
+*/
