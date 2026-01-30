@@ -100,7 +100,7 @@ class ArrayListDemo
 		System.out.println(al2);
 		
 		/* 5. boolean removeAll(Collection c) (implemented From Collection in ArrayList)
-		remove all elements from arraylist 
+		remove all elements from arraylist  ( i,e remove common elements) 
 		Interesting: java 8 
 		boolean removeIf(Predicate<? super E> filter);
 		Usage list.removeIf(n -> n % 2 == 0); // removes even numbers
@@ -112,6 +112,7 @@ class ArrayListDemo
 		
 		/* 6. boolean retainAll(Collection c) (implemented from collection in ArrayList)
 		Keeps only the elements that are present in the given collection removes everything else
+			common elemnts bas bache rhege
 		*/
 
 		al2.addAll(al1);
@@ -185,7 +186,115 @@ class ArrayListDemo
 		       int size() (implemented from Collection in ArrayList)
 		*/
 		System.out.println(al3.isEmpty());
-		System.out.println(al2.size());		
+		System.out.println(al2.size());
+		
+		/*14. List<E> subList(int fromindex(inclusive),int toindex(exclusive))
+		*/
+		ArrayList al4=new ArrayList<>();
+		al4.add(1);
+		al4.add(2);
+		al4.add(3);
+		al4.add(4);
+		al4.add(5);
+		al4.add(6);
+		// ArrayList l1=al4.subList(2,5);
+		//Here above error occured
+		
+		List l1=al4.subList(2,5);
+		System.out.println(l1);
+		System.out.println(al4);
+		//If we enter index which is out of bound then exception occurs
+		
+		l1.set(2,66); //change occur in l1 as well as al4 
+		/* means l1 and al4 dono ke liye memory same he  l1 ke liye separate object create 
+		nhi hua he that's why this changes occur 
+		*/ 
+		System.out.println(l1);
+		System.out.println(al4);
+		
+		l1.add(1,54);
+		
+		System.out.println(l1);
+		System.out.println(al4);
+		
+		al4.add(1,45);
+		
+		//System.out.println(l1); //Exception because mapping gets distorted 
+		//ConcurentModificationException
+		System.out.println(al4);
+		
+		/*
+		subList() is th live view of original list , if the original list is structrually modified 
+		after creatuiing the sublist the sublist becomes inconsistent and java throws ConcurentModificationException
+		*/
+		
+		
+		
+		//15. java.lang.Object[] toArray();
+		
+		/*ex1
+		al4.clear();
+		System.out.println(al4);
+		al4.add(10);
+		al4.add(20);
+		al4.add(30);
+		al4.add(40);
+		al4.add(50);
+		Object o[]=new Object[al4.size()];
+		System.out.println(o);
+		o=al4.toArray();
+		for(Object o1:o)
+		{
+			System.out.println(o1);
+		}
+		System.out.println(o);
+		/*
+		
+		/*ex2
+		al4.clear();
+		System.out.println(al4);
+		al4.add(10);
+		al4.add(20);
+		al4.add(30);
+		al4.add(40);
+		al4.add(50);
+		//Case1:
+		Object o[]=new Object[al4.size()];
+		System.out.println(o);
+		// Case2
+		Object o[]=new Object[7];
+		System.out.println(o);
+		//Case3
+		Object o[]=new Object[3];
+		System.out.println(o);
+		// Case4
+		Object o[]=null;
+		System.out.println(o);
+		o=al4.toArray();
+		for(Object o1:o)
+		{
+			System.out.println(o1);
+		}
+		System.out.println(o);
+		System.out.println(al);
+		Same Output in all */
+		
+		/*ex3. ArrayStoreException
+		al4.clear();
+		System.out.println(al4);
+		al4.add(10);
+		al4.add(20);
+		al4.add("30");
+		al4.add(40);
+		al4.add(50);
+		Integer o[]=new Integer[5];
+		System.out.println(o);
+		al.toArray(o); exception 
+		
+		Proof:-
+		Object o[]=new Integer[5];
+		o[2]="55"; java.lang.ArrayStoreException
+		*/
 	}
 }
 /* Where ArrayList Preffered?
